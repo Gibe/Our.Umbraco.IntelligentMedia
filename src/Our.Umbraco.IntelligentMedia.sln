@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.IntelligentMedia", "Our.Umbraco.IntelligentMedia\Our.Umbraco.IntelligentMedia.csproj", "{C964D0D1-F89A-4920-B869-D21CF564B030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.IntelligentMedia.Azure", "Our.Umbraco.IntelligentMedia.Azure\Our.Umbraco.IntelligentMedia.Azure.csproj", "{6E9D23C3-2744-4192-B884-12B05E675D80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.IntelligentMedia.Google", "Our.Umbraco.IntelligentMedia.Google\Our.Umbraco.IntelligentMedia.Google.csproj", "{D66D2BDD-2A1F-4EAD-B659-3BBBBF875A83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F057F0CC-02D3-476C-B014-46ED34BD4ABF}"
+	ProjectSection(SolutionItems) = preProject
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C964D0D1-F89A-4920-B869-D21CF564B030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C964D0D1-F89A-4920-B869-D21CF564B030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C964D0D1-F89A-4920-B869-D21CF564B030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C964D0D1-F89A-4920-B869-D21CF564B030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E9D23C3-2744-4192-B884-12B05E675D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E9D23C3-2744-4192-B884-12B05E675D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E9D23C3-2744-4192-B884-12B05E675D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E9D23C3-2744-4192-B884-12B05E675D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D66D2BDD-2A1F-4EAD-B659-3BBBBF875A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D66D2BDD-2A1F-4EAD-B659-3BBBBF875A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D66D2BDD-2A1F-4EAD-B659-3BBBBF875A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D66D2BDD-2A1F-4EAD-B659-3BBBBF875A83}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF5C3ED2-378A-4BC2-8F63-D72F952727AF}
+	EndGlobalSection
+EndGlobal
