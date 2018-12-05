@@ -141,6 +141,7 @@
     <Reference Include="System.Data.SqlServerCe.Entity, Version=4.0.0.1, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.12.4\lib\net45\System.Data.SqlServerCe.Entity.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -213,6 +214,7 @@
     <Compile Include="IIntelligentMediaService.cs" />
     <Compile Include="IIntelligentMediaSettings.cs" />
     <Compile Include="IntelligentMediaService.cs" />
+    <Compile Include="IntelligentMediaSettings.cs" />
     <Compile Include="IVisionApi.cs" />
     <Compile Include="IVisionResponse.cs" />
     <Compile Include="ProbableTag.cs" />

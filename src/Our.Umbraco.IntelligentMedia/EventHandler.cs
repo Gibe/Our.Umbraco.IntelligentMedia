@@ -1,5 +1,6 @@
 ﻿using Umbraco.Core;
 using Umbraco.Core.Events;
+using Umbraco.Core.IO;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 
@@ -16,22 +17,10 @@ namespace Our.Umbraco.IntelligentMedia
 
 		private async void MediaServiceSaved(IMediaService sender, SaveEventArgs<IMedia> e)
 		{
-			var service = new IntelligentMediaService();
-			foreach (var mediaItem in e.SavedEntities)
+			var service = new IntelligentMediaService((IFileSystem2)FileSystemProviderManager.Current.GetUnderlyingFileSystemProvider("media"), new IntelligentMediaSettings());
+			foreach (var media in e.SavedEntities)
 			{
-				if (!string.IsNullOrEmpty(mediaItem.GetValue<string>("json")))
-				{
-					continue;
-				}
-
-				var visionMedia = new VisionMedia();
-				foreach (var api in service.VisionApis())
-				{
-					var visionResponse = await api.MakeRequest(mediaItem).ConfigureAwait(false);
-					visionMedia = visionMedia.Merge(visionResponse);
-				}
-
-				visionMedia.UpdateUmbracoMedia(mediaItem, ApplicationContext.Current.Services.MediaService);
+				service.UpdateMedia(media);
 			}
 		}
 	}

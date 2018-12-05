@@ -217,7 +217,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gibe.Umbraco.IntelligentMedia\Our.Umbraco.IntelligentMedia.csproj">
+    <ProjectReference Include="..\Our.Umbraco.IntelligentMedia\Our.Umbraco.IntelligentMedia.csproj">
       <Project>{c964d0d1-f89a-4920-b869-d21cf564b030}</Project>
       <Name>Our.Umbraco.IntelligentMedia</Name>
     </ProjectReference>

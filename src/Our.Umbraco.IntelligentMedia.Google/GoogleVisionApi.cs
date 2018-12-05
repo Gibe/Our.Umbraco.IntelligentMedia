@@ -1,37 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using ImageProcessor;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Umbraco.Core.IO;
-using Umbraco.Core.Models;
 
 namespace Our.Umbraco.IntelligentMedia.Google
 {
   public class GoogleVisionApi : IVisionApi
 	{
-		private readonly string _apiKey;
-		private readonly IFileSystem2 _fileSystem;
-
-		public GoogleVisionApi(IIntelligentMediaSettings settings, IFileSystem2 fileSystem)
+		public async Task<IVisionResponse> MakeRequest(IIntelligentMediaSettings settings, byte[] image)
 		{
-			_fileSystem = fileSystem;
-			_apiKey = settings.Settings<GoogleVisionSettings>().ApiKey;
-		}
-		
-		public async Task<IVisionResponse> MakeRequest(IMedia media)
-		{
+			var apiKey = settings.Settings<GoogleVisionSettings>().ApiKey;
 			var client = new HttpClient();
-			var uri = $"https://vision.googleapis.com/v1/images:annotate?key={_apiKey}";
+			var uri = $"https://vision.googleapis.com/v1/images:annotate?key={apiKey}";
 
-			var umbracoFileString = media.GetValue<string>("umbracoFile");
-			var umbracoFile = JsonConvert.DeserializeObject<UmbracoFileData>(umbracoFileString);
-			var imageData = Convert.ToBase64String(GetImageAsByteArray(umbracoFile.Src));
+			var imageData = Convert.ToBase64String(image);
 
 			var request = new AnnotateImageRequests
 			{
@@ -62,23 +47,7 @@ namespace Our.Umbraco.IntelligentMedia.Google
 			return new GoogleVisionResponse(response, json);
 		}
 
-		private byte[] GetImageAsByteArray(string imageFilePath)
-		{
-			var fileStream = _fileSystem.OpenFile(imageFilePath);
-
-			using (var outStream = new MemoryStream())
-			{
-				using (var imageFactory = new ImageFactory())
-				{
-					imageFactory.Load(fileStream)
-						.Resize(new Size(1000, 1000))
-						.Save(outStream);
-
-				}
-				outStream.Position = 0;
-				return new BinaryReader(outStream).ReadBytes((int)outStream.Length);
-			}
-		}
+		
 	}
 
 	public class AnnotateResponse
