@@ -1,5 +1,7 @@
 ﻿# Sample Site
 
 Backoffice login:
-test@test.com
-testtesttest
+
+Username: test@test.com
+
+Password: testtesttest
