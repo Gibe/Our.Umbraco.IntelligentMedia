@@ -8,9 +8,9 @@ namespace Our.Umbraco.IntelligentMedia
 {
 	public class IntelligentMediaSettings : IIntelligentMediaSettings
 	{
-		public T Settings<T>()
+		public T Settings<T>() where T : new()
 		{
-			throw new NotImplementedException();
+			return new T();
 		}
 	}
 }

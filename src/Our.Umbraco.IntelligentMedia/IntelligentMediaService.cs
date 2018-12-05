@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using ImageProcessor;
+using ImageProcessor.Imaging;
 using Newtonsoft.Json;
 using Umbraco.Core;
 using Umbraco.Core.IO;
@@ -15,10 +16,10 @@ namespace Our.Umbraco.IntelligentMedia
 	public class IntelligentMediaService : IIntelligentMediaService
 	{
 		private static List<IVisionApi> _apis;
-		private readonly IFileSystem2 _fileSystem;
+		private readonly IFileSystem _fileSystem;
 		private readonly IIntelligentMediaSettings _intelligentMediaSettings;
 
-		public IntelligentMediaService(IFileSystem2 fileSystem, IIntelligentMediaSettings settings)
+		public IntelligentMediaService(IFileSystem fileSystem, IIntelligentMediaSettings settings)
 		{
 			_fileSystem = fileSystem;
 			_intelligentMediaSettings = settings;
@@ -31,9 +32,9 @@ namespace Our.Umbraco.IntelligentMedia
 				return;
 			}
 
-			var umbracoFileString = media.GetValue<string>("umbracoFile");
-			var umbracoFile = JsonConvert.DeserializeObject<UmbracoFileData>(umbracoFileString);
-			var image = GetImageAsByteArray(umbracoFile.Src);
+			var umbracoFile = media.GetValue<string>("umbracoFile");
+			//var umbracoFile = JsonConvert.DeserializeObject<UmbracoFileData>(umbracoFileString);
+			var image = GetImageAsByteArray(umbracoFile);
 
 			var visionMedia = new VisionMedia();
 			foreach (var api in VisionApis())
@@ -54,9 +55,8 @@ namespace Our.Umbraco.IntelligentMedia
 				using (var imageFactory = new ImageFactory())
 				{
 					imageFactory.Load(fileStream)
-						.Resize(new Size(1000, 1000))
+						.Resize(new ResizeLayer(new Size(1000,1000), upscale:false, resizeMode:ResizeMode.Max))
 						.Save(outStream);
-
 				}
 				outStream.Position = 0;
 				return new BinaryReader(outStream).ReadBytes((int)outStream.Length);
@@ -70,6 +70,7 @@ namespace Our.Umbraco.IntelligentMedia
 				var visionApiType = typeof(IVisionApi);
 				var types = AppDomain.CurrentDomain.GetAssemblies()
 					.SelectMany(s => s.GetTypes())
+					.Where(p => p.IsClass)
 					.Where(p => visionApiType.IsAssignableFrom(p));
 
 				_apis = types.Select(t => (IVisionApi)DependencyResolver.Current.GetService(t))

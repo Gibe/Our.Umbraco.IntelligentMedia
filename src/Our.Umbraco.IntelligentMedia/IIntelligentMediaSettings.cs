@@ -2,6 +2,6 @@
 {
 	public interface IIntelligentMediaSettings
 	{
-		T Settings<T>();
+		T Settings<T>() where T : new();
 	}
 }
