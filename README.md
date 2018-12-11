@@ -8,27 +8,31 @@ Adds support for adding properties relevant to images based derived using machin
 To install via nuget:
 
 Either 
+
 ```Install-Package Our.Umbraco.IntelligentMedia.Google``` 
+
 For Google Vision API or
+
 ```Install-Package Our.Umbraco.IntelligentMedia.Azure```
+
 for Azure Vision API, or both to combine data from both
 
 ## Web.config Configuration
 You'll need to configure AppSettings:
 
 If you want to override the media name with one from the Vision API:
-```
+```xml
 <add key="IntelligentMedia:OverwriteName" value="true" />
 ```
 
 For Google you'll need the following:
-```
+```xml
 <add key="IntelligentMedia:Google:ApiKey" value="" />
 ```
 You'll need to insert your Google Vision API key
 
 For Azure these:
-```
+```xml
 <add key="IntelligentMedia:Azure:SubscriptionKey" value="" />
 <add key="IntelligentMedia:Azure:Region" value="westeurope" />
 ```
