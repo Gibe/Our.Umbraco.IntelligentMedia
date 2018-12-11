@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web.Mvc;
 using ImageProcessor;
 using ImageProcessor.Imaging;
-using Newtonsoft.Json;
 using Umbraco.Core;
 using Umbraco.Core.IO;
 using Umbraco.Core.Models;
@@ -33,7 +32,6 @@ namespace Our.Umbraco.IntelligentMedia
 			}
 
 			var umbracoFile = media.GetValue<string>("umbracoFile");
-			//var umbracoFile = JsonConvert.DeserializeObject<UmbracoFileData>(umbracoFileString);
 			var image = GetImageAsByteArray(umbracoFile);
 
 			var visionMedia = new VisionMedia();
@@ -43,7 +41,7 @@ namespace Our.Umbraco.IntelligentMedia
 				visionMedia = visionMedia.Merge(visionResponse);
 			}
 
-			visionMedia.UpdateUmbracoMedia(media, ApplicationContext.Current.Services.MediaService);
+			visionMedia.UpdateUmbracoMedia(media, ApplicationContext.Current.Services.MediaService, _intelligentMediaSettings);
 		}
 
 		private byte[] GetImageAsByteArray(string imageFilePath)

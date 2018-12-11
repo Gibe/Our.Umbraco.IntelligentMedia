@@ -13,7 +13,6 @@ namespace Our.Umbraco.IntelligentMedia
 			Tags = new List<ProbableTag>();
 			Categories = new List<ProbableTag>();
 			Descriptions = new List<ProbableTag>();
-			Json = "";
 		}
 
 		private string Name => Descriptions.OrderByDescending(d => d.Confidence).First().Tag;
@@ -23,9 +22,7 @@ namespace Our.Umbraco.IntelligentMedia
 		private int? NumberOfFaces { get; set; }
 		private string PrimaryColour { get; set; }
 		private string BackgroundColour { get; set; }
-		private string Json { get; set; }
 		
-
 		public VisionMedia Merge(IVisionResponse response)
 		{
 			var tags = Tags;
@@ -37,37 +34,43 @@ namespace Our.Umbraco.IntelligentMedia
 			var descriptions = Descriptions;
 			descriptions.AddRange(response.Description);
 
-			var json = Json + "\r\n" + response.Json;
-			
+
 			return new VisionMedia
 			{
 				Tags = tags,
 				Categories = categories,
 				Descriptions = descriptions,
 				NumberOfFaces = Math.Max(NumberOfFaces??0, response.NumberOfFaces??0),
-				Json = json
+				PrimaryColour = PrimaryColour ?? response.PrimaryColour,
+				BackgroundColour = BackgroundColour ?? response.BackgroundColour
 			};
 		}
 
-		public void UpdateUmbracoMedia(IMedia mediaItem, IMediaService mediaService)
+		public void UpdateUmbracoMedia(IMedia mediaItem, IMediaService mediaService, IIntelligentMediaSettings settings)
 		{
 
-			mediaItem.Name = Name;
-			mediaItem.SetValue("tags",
+			if (settings.Settings<GlobalSettings>().OverwriteName)
+			{
+				mediaItem.Name = Name;
+			}
+
+			mediaItem.SetValue("imTags",
 				String.Join(",", Tags
+					.OrderByDescending(t => t.Confidence)
 					.Select(t => t.Tag)
 					.Distinct()));
-			mediaItem.SetValue("description", 
+			mediaItem.SetValue("imDescription", 
 				Descriptions
 					.OrderByDescending(d => d.Confidence)
 					.First().Tag);
-			mediaItem.SetValue("categories",
+			mediaItem.SetValue("imCategories",
 				String.Join(",", Categories
+					.OrderByDescending(t => t.Confidence)
 					.Select(t => t.Tag.Replace("_", " ").TrimEnd())));
-			mediaItem.SetValue("numberOfFaces", NumberOfFaces);
-			mediaItem.SetValue("primaryColour", PrimaryColour);
-			mediaItem.SetValue("backgroundColour", BackgroundColour);
-			mediaItem.SetValue("json", Json);
+			mediaItem.SetValue("imNumberOfFaces", NumberOfFaces);
+			mediaItem.SetValue("imPrimaryColour", PrimaryColour);
+			mediaItem.SetValue("imBackgroundColour", BackgroundColour);
+			mediaItem.SetValue("imPopulated", true);
 			mediaService.Save(mediaItem);
 		}
 	}

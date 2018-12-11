@@ -14,12 +14,10 @@ namespace Our.Umbraco.IntelligentMedia.Google
 			BackgroundColour = null;
 			PrimaryColour = null;
 			Categories = new List<ProbableTag>();
-			Json = json;
 		}
 
 		public List<ProbableTag> Tags { get; }
 		public List<ProbableTag> Categories { get; }
-		public string Json { get; }
 		public List<ProbableTag> Description { get; }
 		public int? NumberOfFaces { get; }
 		public string PrimaryColour { get; }

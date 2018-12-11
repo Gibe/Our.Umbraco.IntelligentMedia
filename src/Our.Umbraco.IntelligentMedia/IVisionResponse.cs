@@ -6,7 +6,6 @@ namespace Our.Umbraco.IntelligentMedia
 	{
 		List<ProbableTag> Tags { get; }
 		List<ProbableTag> Categories { get;}
-		string Json { get; }
 		List<ProbableTag> Description { get; }
 		int? NumberOfFaces { get; }
 		string PrimaryColour { get; }
