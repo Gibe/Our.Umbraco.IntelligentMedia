@@ -53,24 +53,32 @@ namespace Our.Umbraco.IntelligentMedia
 				mediaItem.Name = Name;
 			}
 
-			mediaItem.SetValue("imTags",
+			SetPropertyIfAvailable(mediaItem, "imTags", 
 				string.Join(",", Tags
-					.OrderByDescending(t => t.Confidence)
-					.Select(t => t.Tag)
-					.Distinct()));
-			mediaItem.SetValue("imDescription", 
+						.OrderByDescending(t => t.Confidence)
+						.Select(t => t.Tag)
+						.Distinct()));
+			SetPropertyIfAvailable(mediaItem, "imDescription", 
 				Descriptions
 					.OrderByDescending(d => d.Confidence)
 					.First().Tag);
-			mediaItem.SetValue("imCategories",
+			SetPropertyIfAvailable(mediaItem, "imCategories",
 				string.Join(",", Categories
 					.OrderByDescending(t => t.Confidence)
 					.Select(t => t.Tag.Replace("_", " ").TrimEnd())));
-			mediaItem.SetValue("imNumberOfFaces", NumberOfFaces);
-			mediaItem.SetValue("imPrimaryColour", PrimaryColour);
-			mediaItem.SetValue("imBackgroundColour", BackgroundColour);
-			mediaItem.SetValue("imPopulated", true);
+			SetPropertyIfAvailable(mediaItem, "imNumberOfFaces", NumberOfFaces);
+			SetPropertyIfAvailable(mediaItem, "imPrimaryColour", PrimaryColour);
+			SetPropertyIfAvailable(mediaItem, "imBackgroundColour", BackgroundColour);
+			SetPropertyIfAvailable(mediaItem, "imPopulated", true);
 			mediaService.Save(mediaItem);
+		}
+
+		private void SetPropertyIfAvailable(IMedia media, string propertyName, object value)
+		{
+			if (media.HasProperty(propertyName))
+			{
+				media.SetValue(propertyName,value);
+			}
 		}
 	}
 }
