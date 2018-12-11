@@ -33,14 +33,13 @@ namespace Our.Umbraco.IntelligentMedia
 
 			var descriptions = Descriptions;
 			descriptions.AddRange(response.Description);
-
-
+			
 			return new VisionMedia
 			{
 				Tags = tags,
 				Categories = categories,
 				Descriptions = descriptions,
-				NumberOfFaces = Math.Max(NumberOfFaces??0, response.NumberOfFaces??0),
+				NumberOfFaces = Math.Max(NumberOfFaces ?? 0, response.NumberOfFaces ?? 0),
 				PrimaryColour = PrimaryColour ?? response.PrimaryColour,
 				BackgroundColour = BackgroundColour ?? response.BackgroundColour
 			};
@@ -55,7 +54,7 @@ namespace Our.Umbraco.IntelligentMedia
 			}
 
 			mediaItem.SetValue("imTags",
-				String.Join(",", Tags
+				string.Join(",", Tags
 					.OrderByDescending(t => t.Confidence)
 					.Select(t => t.Tag)
 					.Distinct()));
@@ -64,7 +63,7 @@ namespace Our.Umbraco.IntelligentMedia
 					.OrderByDescending(d => d.Confidence)
 					.First().Tag);
 			mediaItem.SetValue("imCategories",
-				String.Join(",", Categories
+				string.Join(",", Categories
 					.OrderByDescending(t => t.Confidence)
 					.Select(t => t.Tag.Replace("_", " ").TrimEnd())));
 			mediaItem.SetValue("imNumberOfFaces", NumberOfFaces);
