@@ -26,7 +26,7 @@ namespace Our.Umbraco.IntelligentMedia
 
 		public async void UpdateMedia(IMedia media)
 		{
-			if (!media.GetValue<bool>("imPopulated"))
+			if (media.GetValue<bool>("imPopulated"))
 			{
 				return;
 			}
