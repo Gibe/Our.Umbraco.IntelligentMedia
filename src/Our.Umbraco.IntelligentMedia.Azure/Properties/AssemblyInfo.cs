@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Gibe.Umbraco.IntelligentMedia.Azure")]
+[assembly: AssemblyTitle("Our.Umbraco.IntelligentMedia.Azure")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Gibe.Umbraco.IntelligentMedia.Azure")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCompany("Gibe Digital Ltd")]
+[assembly: AssemblyProduct("Our.Umbraco.IntelligentMedia.Azure")]
+[assembly: AssemblyCopyright("Copyright © Gibe Digital 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
