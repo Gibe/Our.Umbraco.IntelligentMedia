@@ -219,6 +219,15 @@
     <Compile Include="IntelligentMediaSettings.cs" />
     <Compile Include="IVisionApi.cs" />
     <Compile Include="IVisionResponse.cs" />
+    <Compile Include="MediaProperties\AbstractMediaProperty.cs" />
+    <Compile Include="MediaProperties\CategoriesProperty.cs" />
+    <Compile Include="MediaProperties\DescriptionProperty.cs" />
+    <Compile Include="MediaProperties\NumberOfFacesProperty.cs" />
+    <Compile Include="MediaProperties\PopulatedProperty.cs" />
+    <Compile Include="MediaProperties\BackgroundColourProperty.cs" />
+    <Compile Include="MediaProperties\PrimaryColourProperty.cs" />
+    <Compile Include="MediaProperties\TagsProperty.cs" />
+    <Compile Include="MediaProperties\UmbracoFileProperty.cs" />
     <Compile Include="ProbableTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UmbracoFileData.cs" />

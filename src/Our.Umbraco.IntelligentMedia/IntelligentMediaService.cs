@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web.Mvc;
 using ImageProcessor;
 using ImageProcessor.Imaging;
+using Our.Umbraco.IntelligentMedia.MediaProperties;
 using Umbraco.Core;
 using Umbraco.Core.IO;
 using Umbraco.Core.Models;
@@ -26,12 +27,14 @@ namespace Our.Umbraco.IntelligentMedia
 
 		public async void UpdateMedia(IMedia media)
 		{
-			if (!media.HasProperty("imPopulated") || media.GetValue<bool>("imPopulated") || !media.HasProperty("umbracoFile"))
+			var populatedProperty = new PopulatedProperty(media);
+			var umbracoFileProperty = new UmbracoFileProperty(media);
+			if (!populatedProperty.Exists() || populatedProperty.Value<bool>() || !umbracoFileProperty.Exists())
 			{
 				return;
 			}
 
-			var umbracoFile = media.GetValue<string>("umbracoFile");
+			var umbracoFile = umbracoFileProperty.Value<string>();
 			var image = GetImageAsByteArray(umbracoFile);
 
 			var visionMedia = new VisionMedia();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Our.Umbraco.IntelligentMedia.MediaProperties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Umbraco.Core.Models;
@@ -53,32 +54,14 @@ namespace Our.Umbraco.IntelligentMedia
 				mediaItem.Name = Name;
 			}
 
-			SetPropertyIfAvailable(mediaItem, "imTags", 
-				string.Join(",", Tags
-						.OrderByDescending(t => t.Confidence)
-						.Select(t => t.Tag)
-						.Distinct()));
-			SetPropertyIfAvailable(mediaItem, "imDescription", 
-				Descriptions
-					.OrderByDescending(d => d.Confidence)
-					.First().Tag);
-			SetPropertyIfAvailable(mediaItem, "imCategories",
-				string.Join(",", Categories
-					.OrderByDescending(t => t.Confidence)
-					.Select(t => t.Tag.Replace("_", " ").TrimEnd())));
-			SetPropertyIfAvailable(mediaItem, "imNumberOfFaces", NumberOfFaces);
-			SetPropertyIfAvailable(mediaItem, "imPrimaryColour", PrimaryColour);
-			SetPropertyIfAvailable(mediaItem, "imBackgroundColour", BackgroundColour);
-			SetPropertyIfAvailable(mediaItem, "imPopulated", true);
+			new TagsProperty(mediaItem).SetValueIfExists(string.Join(",", Tags.OrderByDescending(t => t.Confidence).Select(t => t.Tag).Distinct()));
+			new DescriptionProperty(mediaItem).SetValueIfExists(Descriptions.OrderByDescending(d => d.Confidence).First().Tag);
+			new CategoriesProperty(mediaItem).SetValueIfExists(string.Join(",", Categories.OrderByDescending(t => t.Confidence).Select(t => t.Tag.Replace("_", " ").TrimEnd())));
+			new NumberOfFacesProperty(mediaItem).SetValueIfExists(NumberOfFaces);
+			new PrimaryColourProperty(mediaItem).SetValueIfExists(PrimaryColour);
+			new BackgroundColourProperty(mediaItem).SetValueIfExists(BackgroundColour);
+			new PopulatedProperty(mediaItem).SetValueIfExists(true);
 			mediaService.Save(mediaItem);
-		}
-
-		private void SetPropertyIfAvailable(IMedia media, string propertyName, object value)
-		{
-			if (media.HasProperty(propertyName))
-			{
-				media.SetValue(propertyName,value);
-			}
 		}
 	}
 }
