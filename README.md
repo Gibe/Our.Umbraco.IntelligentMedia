@@ -1,6 +1,6 @@
 # Intelligent Media for Umbraco
 
-[![Build status](https://dev.azure.com/gibeteam/Our.Umbraco.IntelligentMedia/_apis/build/status/Our.Umbraco.IntelligentMedia-build)](https://dev.azure.com/gibeteam/Our.Umbraco.IntelligentMedia/_build/latest?definitionId=1)
+[![Build status](https://ci.appveyor.com/api/projects/status/hw8nt1t6h8okngtw/branch/master?svg=true)](https://ci.appveyor.com/project/stevetemple/our-umbraco-intelligentmedia/branch/master)
 
 Adds support for adding properties relevant to images based derived using machine learning. Whenever a media item is saved it will have properties set on the media items if they are present on the media type. Will work on any media item with an upload property called umbracoFile. 
 Currently Azure Computer Vision API and Google's Vision API are both supported.
