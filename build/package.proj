@@ -32,7 +32,7 @@
 		<NuGetPackageName>Intelligent Media</NuGetPackageName>
 		<Copyright>Copyright &#169; 2018 Gibe Digital Ltd</Copyright>
 		<Owners>Gibe Digital</Owners> 
-		<IconUrl></IconUrl>
+		<IconUrl>https://github.com/Gibe/Our.Umbraco.IntelligentMedia/tree/master/icons/cpu.png</IconUrl>
 		<Tags>umbraco,vision,ai</Tags>
 		<Language>en-GB</Language>
 		<RequireLicenseAcceptance>false</RequireLicenseAcceptance>
