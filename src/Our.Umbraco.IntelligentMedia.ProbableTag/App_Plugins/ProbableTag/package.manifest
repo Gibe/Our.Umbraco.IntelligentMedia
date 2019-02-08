@@ -1,0 +1,15 @@
+{
+    propertyEditors: [
+        {
+            "alias": "Our.Umbraco.ProbableTag",
+            "name": "Probable tag",
+            "icon":  "icon-1234",
+            "editor": {
+                "view": "~/App_Plugins/ProbableTag/probabletag.html"
+            }
+        }
+    ],
+    "javascript": [
+        '~/App_Plugins/ProbableTag/probabletag.controller.js'
+    ]
+}
