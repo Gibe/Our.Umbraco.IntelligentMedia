@@ -76,7 +76,7 @@
 		<BuildUmbDir>$(BuildDir)\_umbraco</BuildUmbDir>
 		<BuildNuGetDir>$(BuildDir)\_nuget</BuildNuGetDir>
 		<ArtifactsDir>$(RootDir)\artifacts</ArtifactsDir>
-		<ProjectDir>$(RootDir)\src\Gibe.LinkPicker.Umbraco</ProjectDir>
+		<ProjectDir>$(RootDir)\src\Our.Umbraco.IntelligentMedia</ProjectDir>
 	</PropertyGroup>
 
 	<!-- TARGETS -->
