@@ -22,5 +22,6 @@ namespace Our.Umbraco.IntelligentMedia.Google
 		public int? NumberOfFaces { get; }
 		public string PrimaryColour { get; }
 		public string BackgroundColour { get; }
-	}
+        public FocalPoint FocalPoint => null;
+    }
 }

@@ -5,8 +5,7 @@
             "name": "Probable tag",
             "icon":  "icon-1234",
             "editor": {
-                "view": "~/App_Plugins/ProbableTag/probabletag.html",
-                "valueType": "JSON"
+                "view": "~/App_Plugins/ProbableTag/probabletag.html"
             }
         }
     ],

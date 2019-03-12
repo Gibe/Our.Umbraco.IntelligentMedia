@@ -333,10 +333,6 @@
       <Project>{6e9d23c3-2744-4192-b884-12b05e675d80}</Project>
       <Name>Our.Umbraco.IntelligentMedia.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Our.Umbraco.IntelligentMedia.Google\Our.Umbraco.IntelligentMedia.Google.csproj">
-      <Project>{d66d2bdd-2a1f-4ead-b659-3bbbbf875a83}</Project>
-      <Name>Our.Umbraco.IntelligentMedia.Google</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Our.Umbraco.IntelligentMedia\Our.Umbraco.IntelligentMedia.csproj">
       <Project>{c964d0d1-f89a-4920-b869-d21cf564b030}</Project>
       <Name>Our.Umbraco.IntelligentMedia</Name>

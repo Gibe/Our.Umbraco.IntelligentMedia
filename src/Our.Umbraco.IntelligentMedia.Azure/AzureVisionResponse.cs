@@ -27,5 +27,6 @@ namespace Our.Umbraco.IntelligentMedia.Azure
 		public int? NumberOfFaces { get; }
 		public string PrimaryColour { get; }
 		public string BackgroundColour { get; }
-	}
+        public FocalPoint FocalPoint => null;
+    }
 }

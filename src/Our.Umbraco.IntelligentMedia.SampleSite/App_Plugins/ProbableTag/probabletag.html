@@ -1,0 +1,10 @@
+﻿<div ng-controller="Our.Umbraco.ProbableTagController" class="umb-property-editor umb-tags">
+    
+    <umb-tags-editor value="model.value.tags"
+                     config="model.config"
+                     validation="model.validation"
+                     on-value-changed="valueChanged(value)"
+                     culture="model.culture">
+    </umb-tags-editor>
+    <label>Minimum confidence</label> <input type="number" value="model.value.confidence" />
+</div>

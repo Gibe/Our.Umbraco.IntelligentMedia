@@ -10,5 +10,7 @@ namespace Our.Umbraco.IntelligentMedia
 		int? NumberOfFaces { get; }
 		string PrimaryColour { get; }
 		string BackgroundColour { get; }
+        FocalPoint FocalPoint { get; }
+        
 	}
 }

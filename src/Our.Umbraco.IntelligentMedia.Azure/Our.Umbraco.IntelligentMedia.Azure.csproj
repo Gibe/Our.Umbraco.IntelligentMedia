@@ -212,7 +212,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureVisionAreaOfInterestApi.cs" />
     <Compile Include="AzureVisionApi.cs" />
+    <Compile Include="AzureVisionAreaOfInterestResponse.cs" />
     <Compile Include="AzureVisionResponse.cs" />
     <Compile Include="AzureVisionSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

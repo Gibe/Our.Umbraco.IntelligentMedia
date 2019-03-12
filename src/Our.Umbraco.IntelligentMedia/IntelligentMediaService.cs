@@ -25,7 +25,7 @@ namespace Our.Umbraco.IntelligentMedia
 			_intelligentMediaSettings = settings;
 		}
 
-		public async void UpdateMedia(IMedia media)
+        public async void UpdateMedia(IMedia media)
 		{
 			var populatedProperty = new PopulatedProperty(media);
 			var umbracoFileProperty = new UmbracoFileProperty(media);
@@ -34,7 +34,7 @@ namespace Our.Umbraco.IntelligentMedia
 				return;
 			}
 
-			var umbracoFile = umbracoFileProperty.Value<string>();
+			var umbracoFile = umbracoFileProperty.Src;
 			var image = GetImageAsByteArray(umbracoFile);
 
 			var visionMedia = new VisionMedia();

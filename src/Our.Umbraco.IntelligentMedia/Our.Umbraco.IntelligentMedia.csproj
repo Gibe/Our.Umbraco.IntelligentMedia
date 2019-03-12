@@ -212,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventHandler.cs" />
+    <Compile Include="FocalPoint.cs" />
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="IIntelligentMediaService.cs" />
     <Compile Include="IIntelligentMediaSettings.cs" />

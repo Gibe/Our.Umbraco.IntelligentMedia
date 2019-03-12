@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Plugins\ProbableTag\probabletag.html" />
+    <Content Include="App_Plugins\ProbableTag\probableTag.controller.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
