@@ -41,7 +41,10 @@ namespace Our.Umbraco.IntelligentMedia
 			foreach (var api in VisionApis())
 			{
 				var visionResponse = await api.MakeRequest(_intelligentMediaSettings ,image).ConfigureAwait(false);
-				visionMedia = visionMedia.Merge(visionResponse);
+				if (visionResponse != null)
+				{
+					visionMedia = visionMedia.Merge(visionResponse);
+				}
 			}
 
 			visionMedia.UpdateUmbracoMedia(media, ApplicationContext.Current.Services.MediaService, _intelligentMediaSettings);
