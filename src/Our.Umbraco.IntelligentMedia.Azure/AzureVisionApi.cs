@@ -13,24 +13,28 @@ namespace Our.Umbraco.IntelligentMedia.Azure
 		public async Task<IVisionResponse> MakeRequest(IIntelligentMediaSettings settings, byte[] image)
 		{
 			var s = settings.Settings<AzureVisionSettings>();
-			var subscriptionKey = s.SubscriptionKey;
-			var region = s.Region;
-			var client = new HttpClient();
-
-			var queryString = HttpUtility.ParseQueryString(string.Empty);
-
-			client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
-
-			queryString["visualFeatures"] = "Tags,Description,Categories,Faces,Color";
-			queryString["language"] = "en";
-
-			var uri = $"https://{region}.api.cognitive.microsoft.com/vision/v1.0/analyze?{queryString}";
-			
-			using (var content = new ByteArrayContent(image))
+			if (s.IsConfigured)
 			{
-				content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-				return await client.PostAsync(uri, content).ContinueWith(ConvertResponse).Result;
+				var subscriptionKey = s.SubscriptionKey;
+				var region = s.Region;
+				var client = new HttpClient();
+				var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+				client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", subscriptionKey);
+
+				queryString["visualFeatures"] = "Tags,Description,Categories,Faces,Color";
+				queryString["language"] = "en";
+
+				var uri = $"https://{region}.api.cognitive.microsoft.com/vision/v1.0/analyze?{queryString}";
+
+				using (var content = new ByteArrayContent(image))
+				{
+					content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+					return await client.PostAsync(uri, content).ContinueWith(ConvertResponse).Result;
+				}
 			}
+
+			return null;
 		}
 
 		private async Task<IVisionResponse> ConvertResponse(Task<HttpResponseMessage> httpResponse)
