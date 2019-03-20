@@ -12,32 +12,40 @@ namespace Our.Umbraco.IntelligentMedia.Google
 	{
 		public async Task<IVisionResponse> MakeRequest(IIntelligentMediaSettings settings, byte[] image)
 		{
-			var apiKey = settings.Settings<GoogleVisionSettings>().ApiKey;
-			var client = new HttpClient();
-			var uri = $"https://vision.googleapis.com/v1/images:annotate?key={apiKey}";
-
-			var imageData = Convert.ToBase64String(image);
-
-			var request = new AnnotateImageRequests
+			var s = settings.Settings<GoogleVisionSettings>();
+			if (s.IsConfigured)
 			{
-				Requests = new List<AnnotateImageRequest>
+
+				var apiKey = s.ApiKey;
+
+				var client = new HttpClient();
+				var uri = $"https://vision.googleapis.com/v1/images:annotate?key={apiKey}";
+
+				var imageData = Convert.ToBase64String(image);
+
+				var request = new AnnotateImageRequests
 				{
-					new AnnotateImageRequest
+					Requests = new List<AnnotateImageRequest>
 					{
-						Image = new ImageRequest {Content = imageData},
-						Features = new List<FeatureRequest>
+						new AnnotateImageRequest
 						{
-							new FeatureRequest { Type = "LABEL_DETECTION" },
-							new FeatureRequest { Type = "FACE_DETECTION" }
+							Image = new ImageRequest {Content = imageData},
+							Features = new List<FeatureRequest>
+							{
+								new FeatureRequest {Type = "LABEL_DETECTION"},
+								new FeatureRequest {Type = "FACE_DETECTION"}
+							}
 						}
 					}
-				}
-			};
-			var content = new StringContent(JsonConvert.SerializeObject(request, new JsonSerializerSettings
-			{
-				ContractResolver = new CamelCasePropertyNamesContractResolver()
-			}), Encoding.UTF8, "application/json");
-			return await client.PostAsync(uri, content).ContinueWith(ConvertResponse).Result;
+				};
+				var content = new StringContent(JsonConvert.SerializeObject(request, new JsonSerializerSettings
+				{
+					ContractResolver = new CamelCasePropertyNamesContractResolver()
+				}), Encoding.UTF8, "application/json");
+				return await client.PostAsync(uri, content).ContinueWith(ConvertResponse).Result;
+			}
+
+			return null;
 		}
 
 		private async Task<IVisionResponse> ConvertResponse(Task<HttpResponseMessage> httpResponse)
